@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Futurista</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: "#06131f",
+                        ocean: "#0a2236",
+                        cyanGlow: "#69f0ff",
+                        mintGlow: "#8fffd1",
+                        panel: "rgba(9, 20, 34, 0.72)"
+                    },
+                    boxShadow: {
+                        neon: "0 0 30px rgba(105, 240, 255, 0.25)",
+                        soft: "0 30px 80px rgba(0, 0, 0, 0.45)"
+                    },
+                    fontFamily: {
+                        display: ["Orbitron", "sans-serif"],
+                        body: ["Space Grotesk", "sans-serif"]
+                    },
+                    animation: {
+                        floaty: "floaty 7s ease-in-out infinite",
+                        pulseSlow: "pulseSlow 5s ease-in-out infinite"
+                    },
+                    keyframes: {
+                        floaty: {
+                            "0%, 100%": { transform: "translateY(0px)" },
+                            "50%": { transform: "translateY(-12px)" }
+                        },
+                        pulseSlow: {
+                            "0%, 100%": { opacity: "0.5", transform: "scale(1)" },
+                            "50%": { opacity: "0.9", transform: "scale(1.08)" }
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+</head>
+<body class="min-h-screen overflow-hidden bg-midnight font-body text-white">
+    <div class="relative isolate flex min-h-screen items-center justify-center px-6 py-10">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(105,240,255,0.18),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(143,255,209,0.18),_transparent_24%),linear-gradient(135deg,_#02060c_0%,_#06131f_45%,_#0a2236_100%)]"></div>
+        <div class="absolute -left-20 top-16 h-72 w-72 rounded-full bg-cyanGlow/10 blur-3xl animate-pulseSlow"></div>
+        <div class="absolute -right-16 bottom-10 h-80 w-80 rounded-full bg-mintGlow/10 blur-3xl animate-floaty"></div>
+        <div class="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:72px_72px]"></div>
+
+        <main class="relative grid w-full max-w-6xl overflow-hidden rounded-[32px] border border-white/10 bg-white/5 shadow-soft backdrop-blur-xl lg:grid-cols-[1.1fr_0.9fr]">
+            <section class="hidden min-h-[720px] flex-col justify-between border-r border-white/10 p-10 lg:flex">
+                <div class="flex items-center gap-3">
+                    <div class="h-3 w-3 rounded-full bg-cyanGlow shadow-neon"></div>
+                    <span class="font-display text-sm uppercase tracking-[0.45em] text-cyanGlow">Nexus Portal</span>
+                </div>
+
+                <div class="space-y-8">
+                    <span class="inline-flex rounded-full border border-cyanGlow/20 bg-cyanGlow/10 px-4 py-2 text-xs uppercase tracking-[0.35em] text-cyanGlow">
+                        Secure Access Layer
+                    </span>
+                    <div class="space-y-5">
+                        <h1 class="max-w-xl font-display text-5xl uppercase leading-tight text-white">
+                            Conecte-se ao painel com visual de proxima geracao.
+                        </h1>
+                        <p class="max-w-lg text-lg leading-8 text-slate-300">
+                            Interface pensada para um ambiente digital sofisticado, com acesso rapido, leitura clara e atmosfera futurista.
+                        </p>
+                    </div>
+
+                    <div class="grid max-w-xl grid-cols-3 gap-4">
+                        <article class="rounded-2xl border border-white/10 bg-white/5 p-4">
+                            <p class="font-display text-2xl text-cyanGlow">256b</p>
+                            <p class="mt-2 text-sm text-slate-300">Criptografia aplicada na sessao</p>
+                        </article>
+                        <article class="rounded-2xl border border-white/10 bg-white/5 p-4">
+                            <p class="font-display text-2xl text-mintGlow">24/7</p>
+                            <p class="mt-2 text-sm text-slate-300">Monitoramento do ambiente</p>
+                        </article>
+                        <article class="rounded-2xl border border-white/10 bg-white/5 p-4">
+                            <p class="font-display text-2xl text-cyanGlow">99.9%</p>
+                            <p class="mt-2 text-sm text-slate-300">Disponibilidade da plataforma</p>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
+                    <div>
+                        <p class="text-xs uppercase tracking-[0.35em] text-slate-400">System Status</p>
+                        <p class="mt-2 text-sm text-slate-200">Todos os modulos operando normalmente.</p>
+                    </div>
+                    <div class="flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-2 text-xs uppercase tracking-[0.25em] text-emerald-300">
+                        <span class="h-2 w-2 rounded-full bg-emerald-300"></span>
+                        Online
+                    </div>
+                </div>
+            </section>
+
+            <section class="relative flex min-h-[720px] items-center justify-center px-6 py-10 sm:px-10">
+                <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),transparent_28%)]"></div>
+
+                <div class="relative w-full max-w-md rounded-[28px] border border-cyanGlow/20 bg-panel p-8 shadow-neon backdrop-blur-2xl sm:p-10">
+                    <div class="mb-8 space-y-3 text-center lg:text-left">
+                        <p class="font-display text-xs uppercase tracking-[0.45em] text-cyanGlow">Area Restrita</p>
+                        <h2 class="font-display text-3xl uppercase text-white">Login</h2>
+                        <p class="text-sm leading-7 text-slate-300">
+                            Entre com suas credenciais para acessar o ambiente principal.
+                        </p>
+                    </div>
+
+                    <form class="space-y-5">
+                        <div class="space-y-2">
+                            <label for="email" class="text-sm font-medium text-slate-200">E-mail</label>
+                            <input
+                                id="email"
+                                type="email"
+                                placeholder="voce@empresa.com"
+                                class="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-cyanGlow focus:ring-2 focus:ring-cyanGlow/30"
+                            />
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <label for="password" class="text-sm font-medium text-slate-200">Senha</label>
+                                <a href="#" class="text-sm text-cyanGlow transition hover:text-mintGlow">Esqueci minha senha</a>
+                            </div>
+                            <input
+                                id="password"
+                                type="password"
+                                placeholder="Digite sua senha"
+                                class="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-cyanGlow focus:ring-2 focus:ring-cyanGlow/30"
+                            />
+                        </div>
+
+                        <div class="flex items-center justify-between gap-4 text-sm text-slate-300">
+                            <label class="flex items-center gap-3">
+                                <input type="checkbox" class="h-4 w-4 rounded border-white/20 bg-transparent text-cyanGlow focus:ring-cyanGlow/40" />
+                                <span>Manter conectado</span>
+                            </label>
+                            <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.25em] text-slate-300">
+                                MFA Ready
+                            </span>
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="w-full rounded-2xl bg-[linear-gradient(135deg,_#69f0ff,_#8fffd1)] px-4 py-3 font-display text-sm uppercase tracking-[0.3em] text-slate-900 transition hover:scale-[1.01] hover:shadow-neon"
+                        >
+                            Acessar Sistema
+                        </button>
+                    </form>
+
+                    <div class="my-6 flex items-center gap-4">
+                        <div class="h-px flex-1 bg-white/10"></div>
+                        <span class="text-xs uppercase tracking-[0.3em] text-slate-400">ou continue com</span>
+                        <div class="h-px flex-1 bg-white/10"></div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <button type="button" class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200 transition hover:border-cyanGlow/40 hover:bg-white/10">
+                            Google
+                        </button>
+                        <button type="button" class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200 transition hover:border-cyanGlow/40 hover:bg-white/10">
+                            GitHub
+                        </button>
+                    </div>
+
+                    <p class="mt-8 text-center text-sm text-slate-400 lg:text-left">
+                        Novo por aqui?
+                        <a href="#" class="text-cyanGlow transition hover:text-mintGlow">Criar conta</a>
+                    </p>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
