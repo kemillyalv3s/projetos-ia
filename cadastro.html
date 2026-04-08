@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Transacao</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        shell: "#111418",
+                        panel: "#181c21",
+                        panelSoft: "#65717d",
+                        line: "#2d3640",
+                        primary: "#5b3df5",
+                        danger: "#e11d48",
+                        success: "#22c55e",
+                        warning: "#4f46e5"
+                    },
+                    fontFamily: {
+                        body: ["Inter", "sans-serif"]
+                    },
+                    boxShadow: {
+                        phone: "0 30px 80px rgba(0, 0, 0, 0.45)"
+                    }
+                }
+            }
+        };
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body class="min-h-screen bg-[#20252d] font-body text-white">
+    <main class="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top,_rgba(91,61,245,0.18),_transparent_28%),linear-gradient(180deg,_#20252d_0%,_#13171d_100%)] px-4 py-10">
+        <section class="relative w-full max-w-[360px] rounded-[42px] border border-slate-500/40 bg-[#0f1317] p-3 shadow-phone">
+            <div class="rounded-[34px] border border-slate-700/70 bg-shell p-3">
+                <div class="mx-auto mb-4 h-7 w-28 rounded-full bg-black"></div>
+
+                <div class="mb-3 flex items-center justify-between px-2">
+                    <h1 class="text-[2rem] font-semibold tracking-tight text-slate-200">Transacao</h1>
+                    <button type="button" class="text-2xl leading-none text-danger transition hover:scale-110" aria-label="Fechar">
+                        &times;
+                    </button>
+                </div>
+
+                <form id="transactionForm" class="space-y-3 rounded-[26px] bg-[#12161b] pb-3">
+                    <div class="overflow-hidden rounded-[18px] bg-panelSoft">
+                        <label for="upload" class="relative flex h-72 cursor-pointer items-center justify-center transition hover:bg-slate-500/20">
+                            <input id="upload" type="file" accept="image/*" class="hidden" />
+                            <img id="uploadPreview" alt="Preview do comprovante" class="hidden h-full w-full object-cover" />
+                            <div id="uploadPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center gap-3 text-white/90">
+                                <svg class="h-14 w-14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                    <path d="M8 17a4 4 0 0 1-.5-7.97A5.5 5.5 0 0 1 18 10a3.5 3.5 0 0 1 .5 6.97H8Z" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M12 15V9" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="m9.5 11.5 2.5-2.5 2.5 2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                                <p id="uploadLabel" class="text-sm font-medium text-slate-100">Adicionar comprovante</p>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="px-2">
+                        <label for="title" class="mb-1 block text-[1.05rem] font-semibold text-slate-200">Titulo</label>
+                        <input id="title" name="title" type="text" placeholder="Salario" class="h-11 w-full rounded-xl border border-line bg-shell px-4 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-primary focus:ring-2 focus:ring-primary/30" />
+                        <p class="mt-1 hidden text-xs text-rose-400" data-error-for="title"></p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 px-2">
+                        <div>
+                            <label for="quantity" class="mb-1 block text-[1.05rem] font-semibold text-slate-200">Qtd.</label>
+                            <input id="quantity" name="quantity" type="number" min="1" step="1" placeholder="1" class="h-11 w-full rounded-xl border border-line bg-shell px-4 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-primary focus:ring-2 focus:ring-primary/30" />
+                            <p class="mt-1 hidden text-xs text-rose-400" data-error-for="quantity"></p>
+                        </div>
+
+                        <div>
+                            <label for="value" class="mb-1 block text-[1.05rem] font-semibold text-slate-200">Valor</label>
+                            <input id="value" name="value" type="text" inputmode="decimal" placeholder="R$ 0,00" class="h-11 w-full rounded-xl border border-line bg-shell px-4 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-primary focus:ring-2 focus:ring-primary/30" />
+                            <p class="mt-1 hidden text-xs text-rose-400" data-error-for="value"></p>
+                        </div>
+                    </div>
+
+                    <div class="px-2">
+                        <label for="date" class="mb-1 block text-[1.05rem] font-semibold text-slate-200">Data</label>
+                        <div class="relative">
+                            <input id="date" name="date" type="date" class="h-11 w-full rounded-xl border border-line bg-shell px-11 pr-4 text-sm text-slate-300 outline-none transition [color-scheme:dark] focus:border-primary focus:ring-2 focus:ring-primary/30" />
+                            <svg class="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M8 2v4M16 2v4M3 10h18M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                        <p class="mt-1 hidden text-xs text-rose-400" data-error-for="date"></p>
+                    </div>
+
+                    <div class="px-2">
+                        <div class="grid grid-cols-3 gap-3">
+                            <button type="button" class="transaction-type flex h-12 items-center justify-center gap-2 rounded-xl border border-success bg-success/5 px-3 text-sm font-semibold text-slate-100 transition hover:bg-success/10" data-type="Ganho">
+                                <svg class="h-4 w-4 text-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="m5 15 5-5 4 4 5-7" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M16 7h3v3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                                Ganho
+                            </button>
+
+                            <button type="button" class="transaction-type flex h-12 items-center justify-center gap-2 rounded-xl border border-danger/70 bg-danger/5 px-3 text-sm font-semibold text-slate-100 transition hover:bg-danger/10" data-type="Gasto">
+                                <svg class="h-4 w-4 text-danger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="m5 9 5 5 4-4 5 7" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M16 17h3v-3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                                Gasto
+                            </button>
+
+                            <button type="button" class="transaction-type flex h-12 items-center justify-center gap-2 rounded-xl border border-warning/70 bg-warning/5 px-3 text-sm font-semibold text-slate-100 transition hover:bg-warning/10" data-type="Invest">
+                                <svg class="h-4 w-4 text-warning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M12 2a4 4 0 0 0-4 4v1H6a2 2 0 0 0-2 2v6a7 7 0 1 0 14 0V9a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4Z" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M12 11v3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <circle cx="12" cy="17" r="0.8" fill="currentColor" stroke="none"></circle>
+                                </svg>
+                                Invest
+                            </button>
+                        </div>
+                        <input id="transactionType" name="transactionType" type="hidden" />
+                        <p class="mt-1 hidden text-xs text-rose-400" data-error-for="transactionType"></p>
+                    </div>
+
+                    <div class="px-2 pt-2">
+                        <button type="submit" class="mx-auto block w-[72%] rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white shadow-[0_18px_30px_rgba(91,61,245,0.35)] transition hover:-translate-y-0.5 hover:bg-[#6d53ff]">
+                            Salvar
+                        </button>
+                    </div>
+
+                    <p id="formSuccess" class="hidden px-2 text-center text-sm font-medium text-emerald-400">
+                        Transacao validada com sucesso.
+                    </p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const form = document.getElementById("transactionForm");
+        const titleInput = document.getElementById("title");
+        const quantityInput = document.getElementById("quantity");
+        const valueInput = document.getElementById("value");
+        const dateInput = document.getElementById("date");
+        const typeInput = document.getElementById("transactionType");
+        const typeButtons = document.querySelectorAll(".transaction-type");
+        const uploadInput = document.getElementById("upload");
+        const uploadLabel = document.getElementById("uploadLabel");
+        const uploadPreview = document.getElementById("uploadPreview");
+        const uploadPlaceholder = document.getElementById("uploadPlaceholder");
+        const successMessage = document.getElementById("formSuccess");
+        let previewUrl = "";
+
+        function showError(field, message) {
+            const errorElement = document.querySelector(`[data-error-for="${field}"]`);
+            const input = document.getElementById(field);
+
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.classList.remove("hidden");
+            }
+
+            if (input) {
+                input.classList.add("border-rose-500", "focus:border-rose-500", "focus:ring-rose-500/30");
+            }
+        }
+
+        function clearError(field) {
+            const errorElement = document.querySelector(`[data-error-for="${field}"]`);
+            const input = document.getElementById(field);
+
+            if (errorElement) {
+                errorElement.textContent = "";
+                errorElement.classList.add("hidden");
+            }
+
+            if (input) {
+                input.classList.remove("border-rose-500", "focus:border-rose-500", "focus:ring-rose-500/30");
+            }
+        }
+
+        function formatCurrency(value) {
+            const digits = value.replace(/\D/g, "");
+
+            if (!digits) {
+                return "";
+            }
+
+            const amount = Number(digits) / 100;
+            return amount.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            });
+        }
+
+        function parseCurrency(value) {
+            const normalized = value.replace(/[^\d,]/g, "").replace(/\./g, "").replace(",", ".");
+            return Number(normalized);
+        }
+
+        function validateForm() {
+            let isValid = true;
+
+            clearError("title");
+            clearError("quantity");
+            clearError("value");
+            clearError("date");
+            clearError("transactionType");
+            successMessage.classList.add("hidden");
+
+            if (titleInput.value.trim().length < 3) {
+                showError("title", "Informe um titulo com pelo menos 3 caracteres.");
+                isValid = false;
+            }
+
+            if (!quantityInput.value || Number(quantityInput.value) <= 0) {
+                showError("quantity", "Digite uma quantidade maior que zero.");
+                isValid = false;
+            }
+
+            const parsedValue = parseCurrency(valueInput.value);
+            if (!valueInput.value || Number.isNaN(parsedValue) || parsedValue <= 0) {
+                showError("value", "Informe um valor valido maior que zero.");
+                isValid = false;
+            }
+
+            if (!dateInput.value) {
+                showError("date", "Selecione uma data.");
+                isValid = false;
+            }
+
+            if (!typeInput.value) {
+                showError("transactionType", "Escolha o tipo da transacao.");
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        valueInput.addEventListener("input", (event) => {
+            const formatted = formatCurrency(event.target.value);
+            event.target.value = formatted;
+            clearError("value");
+        });
+
+        titleInput.addEventListener("input", () => clearError("title"));
+        quantityInput.addEventListener("input", () => clearError("quantity"));
+        dateInput.addEventListener("input", () => clearError("date"));
+
+        typeButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                typeInput.value = button.dataset.type;
+                clearError("transactionType");
+
+                typeButtons.forEach((item) => {
+                    item.classList.remove("ring-2", "ring-white/70", "scale-[1.02]");
+                });
+
+                button.classList.add("ring-2", "ring-white/70", "scale-[1.02]");
+            });
+        });
+
+        uploadInput.addEventListener("change", () => {
+            const file = uploadInput.files[0];
+
+            if (previewUrl) {
+                URL.revokeObjectURL(previewUrl);
+                previewUrl = "";
+            }
+
+            if (!file) {
+                uploadLabel.textContent = "Adicionar comprovante";
+                uploadPreview.src = "";
+                uploadPreview.classList.add("hidden");
+                uploadPlaceholder.classList.remove("hidden");
+                return;
+            }
+
+            previewUrl = URL.createObjectURL(file);
+            uploadPreview.src = previewUrl;
+            uploadPreview.classList.remove("hidden");
+            uploadPlaceholder.classList.add("hidden");
+        });
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            if (!validateForm()) {
+                return;
+            }
+
+            successMessage.classList.remove("hidden");
+        });
+    </script>
+</body>
+
+</html>
